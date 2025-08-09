@@ -1,15 +1,14 @@
-//O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. Aqui você deverá desenvolver a lógica para resolver o problema.
 let nomes = [];
 
 // Adicionar nomes
 function adicionarNome(nome) {
     if (!nome || nome.trim() === "") {
         alert("Digite um nome válido!");
-        return;
+        return false;
     }
     nomes.push(nome.trim());
     console.log("Nome adicionado:", nome);
-    visualizarLista();
+    return true;
 }
 
 // Visualizar lista
@@ -28,7 +27,20 @@ function sortearAmigo() {
     alert("Sorteado: " + sorteado);
 }
 
-// Exemplo de uso:
-adicionarNome(prompt("Digite o nome do amigo:"));
-adicionarNome(prompt("Digite outro nome:"));
+// --- Entrada de nomes ---
+while (nomes.length < 20) {
+    let entrada = prompt(`Digite o nome do amigo (${nomes.length + 1}/20) ou "sorteio" para sortear:`);
+
+    if (!entrada) break; // Se apertar Cancelar, sai
+
+    if (entrada.toLowerCase() === "sorteio") {
+        break; // Sai do loop para sortear
+    }
+
+    if (adicionarNome(entrada)) {
+        visualizarLista();
+    }
+}
+
+// Faz o sorteio
 sortearAmigo();
